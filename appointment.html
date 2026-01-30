@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Appointment</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            height: 60px;
+            background-color: #0a3d62;
+            color: white;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            line-height: 1;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Page Content */
+        main {
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input.error,
+        select.error {
+            border: 2px solid red;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0c7cd5;
+        }
+
+        footer {
+            background-color: #0a3d62;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <h2>CityCare Hospital</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="appointment.html">Book Appointment</a></li>
+            <li><a href="doctors.html">Doctors</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Book Appointment</h2>
+
+        <form onsubmit="return validateForm()">
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name">
+
+            <label for="age">Age</label>
+            <input type="number" id="age">
+
+            <label>Gender</label>
+            <input type="radio" name="gender"> Male
+            <input type="radio" name="gender"> Female
+
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" maxlength="10">
+
+            <label for="email">Email</label>
+            <input type="email" id="email">
+
+            <label for="department">Department</label>
+            <select id="department">
+                <option value="">Select Department</option>
+                <option>Cardiology</option>
+                <option>Orthopedics</option>
+                <option>Neurology</option>
+                <option>Pediatrics</option>
+            </select>
+
+            <label for="doctor">Doctor</label>
+            <select id="doctor">
+                <option value="">Select Doctor</option>
+            </select>
+
+            <label for="date">Appointment Date</label>
+            <input type="date" id="date">
+
+            <label for="time">Appointment Time</label>
+            <select id="time">
+                <option value="">Select Time</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+            </select>
+
+            <button type="submit">Submit Appointment</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CityCare Hospital</p>
+    </footer>
+
+    <script>
+        /* Doctor Mapping */
+        const doctorsByDepartment = {
+            Cardiology: ["Dr. Raj Sharma", "Dr. Meena Kapoor"],
+            Orthopedics: ["Dr. Anjali Verma", "Dr. Rohit Singh"],
+            Neurology: ["Dr. Amit Das"],
+            Pediatrics: ["Dr. Neha Jain"]
+        };
+
+        document.getElementById("department").addEventListener("change", function () {
+            const doctorSelect = document.getElementById("doctor");
+            doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
+
+            if (doctorsByDepartment[this.value]) {
+                doctorsByDepartment[this.value].forEach(doc => {
+                    const option = document.createElement("option");
+                    option.value = doc;
+                    option.text = doc;
+                    doctorSelect.appendChild(option);
+                });
+            }
+        });
+
+        /* Phone number: only digits allowed */
+        document.getElementById("phone").addEventListener("input", function () {
+            this.value = this.value.replace(/\D/g, "");
+        });
+
+        function validateForm() {
+            let valid = true;
+
+            const name = document.getElementById("name");
+            const phone = document.getElementById("phone");
+            const email = document.getElementById("email");
+            const department = document.getElementById("department");
+            const doctor = document.getElementById("doctor");
+            const date = document.getElementById("date");
+            const time = document.getElementById("time");
+
+            const fields = [name, phone, email, department, doctor, date, time];
+
+            fields.forEach(field => field.classList.remove("error"));
+
+            if (name.value === "") { name.classList.add("error"); valid = false; }
+
+            if (!/^\d{10}$/.test(phone.value)) {
+                phone.classList.add("error");
+                valid = false;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                email.classList.add("error");
+                valid = false;
+            }
+
+            if (department.value === "") { department.classList.add("error"); valid = false; }
+            if (doctor.value === "") { doctor.classList.add("error"); valid = false; }
+            if (date.value === "") { date.classList.add("error"); valid = false; }
+            if (time.value === "") { time.classList.add("error"); valid = false; }
+
+            if (!valid) {
+                alert("Please correct the highlighted fields.");
+                return false;
+            }
+
+            alert("Appointment booked successfully!");
+            document.querySelector("form").reset();
+            return false;
+        }
+    </script>
+
+</body>
+
+</html>

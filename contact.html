@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation Bar */
+    nav {
+      position: sticky;
+      top: 0;
+      height: 60px;
+      background-color: #0a3d62;
+      color: white;
+      padding: 0 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    nav h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+      line-height: 1;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Page Content */
+    main {
+      flex: 1;
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    main h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .contact-info {
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+
+    /* Contact Form */
+    form {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0c7cd5;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0a3d62;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <h2>CityCare Hospital</h2>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="appointment.html">Book Appointment</a></li>
+      <li><a href="doctors.html">Doctors</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <h2>Contact Us</h2>
+
+    <div class="contact-info">
+      <p><strong>Address:</strong> CityCare Hospital, Main Road, New Delhi</p>
+      <p><strong>Phone:</strong> +91 98765 43210</p>
+      <p><strong>Email:</strong> info@citycarehospital.com</p>
+    </div>
+
+    <form>
+      <label for="name">Name</label>
+      <input type="text" id="name">
+
+      <label for="email">Email</label>
+      <input type="email" id="email">
+
+      <label for="message">Message</label>
+      <textarea id="message" rows="4"></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CityCare Hospital</p>
+  </footer>
+
+</body>
+
+</html>
